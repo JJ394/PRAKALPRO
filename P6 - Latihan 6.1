@@ -1,0 +1,16 @@
+def perkalian(a, b):
+    hasil = 0
+    proses = ""
+    for i in range(a):
+        hasil += b
+        if i == 0:
+            proses += str(b)
+        else:
+            proses += " + " + str(b)
+    print(f"{a} x {b} = {proses} = {hasil}")
+    return hasil
+
+bil1 = int(input("Masukkan angka pertama: "))
+bil2 = int(input("Masukkan angka kedua: "))
+
+perkalian(bil1, bil2)
