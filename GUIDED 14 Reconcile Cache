@@ -1,0 +1,42 @@
+def reconcile_cache(server_a, server_b):
+    # Inisialisasi hasil dengan 4 set kosong
+    hasil = {
+        'identik': set(),
+        'konflik': set(),
+        'unik_a': set(),
+        'unik_b': set()
+    }
+    
+    # Ambil semua key yang ada di server_a
+    for key in server_a:
+        if key in server_b:
+            # Key ada di kedua server
+            if server_a[key] == server_b[key]:
+                # Timestamp sama → identik
+                hasil['identik'].add(key)
+            else:
+                # Timestamp beda → konflik
+                hasil['konflik'].add(key)
+        else:
+            # Key hanya ada di server_a → unik_a
+            hasil['unik_a'].add(key)
+    
+    # Ambil key yang hanya ada di server_b (belum diproses)
+    for key in server_b:
+        if key not in server_a:
+            hasil['unik_b'].add(key)
+    
+    return hasil
+
+
+# Program utama
+if __name__ == "__main__":
+    # Baca dua dictionary dari input user
+    server_a = eval(input())
+    server_b = eval(input())
+    
+    # Panggil fungsi rekonsiliasi
+    laporan = reconcile_cache(server_a, server_b)
+    
+    # Cetak hasil
+    print(laporan)
