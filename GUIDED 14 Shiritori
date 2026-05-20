@@ -1,0 +1,36 @@
+# Baca jumlah kata
+n = int(input())
+
+# Inisialisasi set untuk menyimpan kata yang sudah pernah diucapkan
+sudah_diucapkan = set()
+
+# Simpan kata pertama
+kata_sebelumnya = input()
+sudah_diucapkan.add(kata_sebelumnya)
+
+# Mulai dari pemain 1 (karena pemain 1 sudah main di awal)
+# Kita akan cek mulai dari kata ke-2 sampai ke-N
+for i in range(2, n + 1):
+    kata_sekarang = input()
+    
+    # Tentukan pemain saat ini
+    # i ganjil -> pemain 1, i genap -> pemain 2
+    if i % 2 == 1:
+        pemain = 1
+    else:
+        pemain = 2
+    
+    # Cek aturan:
+    # 1. Huruf awal kata sekarang harus sama dengan huruf akhir kata sebelumnya
+    # 2. Kata sekarang belum pernah diucapkan
+    if kata_sekarang[0] != kata_sebelumnya[-1] or kata_sekarang in sudah_diucapkan:
+        print(f"Player {pemain} lost")
+        break
+    
+    # Jika lolos, tambahkan ke set dan lanjutkan
+    sudah_diucapkan.add(kata_sekarang)
+    kata_sebelumnya = kata_sekarang
+
+else:
+    # Jika loop selesai tanpa break, berarti semua kata mengikuti aturan
+    print("Fair Game")
